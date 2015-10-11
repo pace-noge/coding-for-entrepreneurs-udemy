@@ -30,7 +30,11 @@ def share(request, ref_id):
         join_obj = Join.objects.get(ref_id=ref_id)
         obj = Join.objects.filter(friend=join_obj)
         count = join_obj.referral.all().count()
-        context = {"ref_id": join_obj.ref_id, "count": count, "ref_url": "http://%s/?ref=%s" % (Site.objects.get_current().domain, join_obj.ref_id)}
+        context = {
+            "ref_id": join_obj.ref_id,
+            "count": count,
+            "ref_url": "http://%s/?ref=%s" % (Site.objects.get_current().domain, join_obj.ref_id)
+        }
         template = "share.html"
     except Exception, e:
         print str(e)

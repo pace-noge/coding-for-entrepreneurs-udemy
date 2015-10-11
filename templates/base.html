@@ -1,4 +1,4 @@
-
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,8 +12,10 @@
 
     <title>Launch With Code</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="http://bootflat.github.io/css/site.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/site.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
 
     <!-- Custom styles for this template -->
@@ -22,6 +24,22 @@
         body {
                 padding-top: 0px;
                 padding-bottom: 0px;
+        }
+        .navbar {
+            margin-bottom: 0px !important;
+            border-radius: 0px !important;
+        }
+
+        .navbar-inverse .navbar-brand, .navbar-brand:hover {
+            color: white;
+        }
+
+        .img-share {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .jumbotron {
+            background-color: #EEEEEE;
         }
     </style>
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -40,18 +58,11 @@
 
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-      </div>
-    </div>
 
-    <div class="container">
+
         {% block content %}{% endblock %}
 
-
+    <div class="container">
       <footer>
         <p>&copy; Company 2014</p>
       </footer>
@@ -61,8 +72,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://bootflat.github.io/js/site.min.js"></script>
+
+    <script src="{% static 'js/site.min.js' %}"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
