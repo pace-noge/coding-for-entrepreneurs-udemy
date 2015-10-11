@@ -31,8 +31,7 @@
     </div>
 </div>
 <div class="container  text-center">
-    {{ ref_id }}<br />
-    {{ count }}<br />
+
     <br />
     <div class="row">
         <div class="col-sm-3">
@@ -129,4 +128,70 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block jquery %}
+
+$signUpCount = {{ count }};
+
+
+updateProgressbar(0, 0);
+updateProgressbar(1, 0);
+updateProgressbar(2, 0);
+updateProgressbar(3, 0);
+
+if($signUpCount > 0 && $signUpCount < 5) {
+    $newPercent = $signUpCount/5 * 100;
+    updateProgressbar(0, $newPercent);
+
+} else if ($signUpCount >= 5 && $signUpCount < 15 ) {
+
+    updateProgressbar(0, 100);
+
+    $newCount = $signUpCount - 5
+    $newPercent = $newCount/10 * 100;
+
+    updateProgressbar(1, $newPercent);
+
+} else if ($signUpCount >= 15 && $signUpCount < 25 ) {
+
+    updateProgressbar(0, 100);
+    updateProgressbar(1, 100);
+
+    $newCount = $signUpCount - 15;
+    $newPercent = $newCount/(25-15) * 100;
+    console.log($newPercent);
+
+    updateProgressbar(2, $newPercent);
+
+} else if ($signUpCount >= 25 && $signUpCount <= 50 ) {
+
+    updateProgressbar(0, 100);
+    updateProgressbar(1, 100);
+    updateProgressbar(2, 100);
+
+    $newCount = $signUpCount - 25;
+    $newPercent = $newCount/(50-25) * 100;
+
+    updateProgressbar(3, $newPercent);
+}
+
+function updateProgressbar(nth_child, value) {
+    if (value == 100) {
+       var progressText = "Completed";
+    } else if (value == 50){
+        var progressText = "So close to Half";
+    } else {
+         var progressText = value + " %";
+    }
+
+
+    $(".progress-bar:eq("+nth_child+")")
+    .css("width", value+"%")
+    .attr("aria-valuenow", value)
+    .text(progressText);
+}
+
+
+
 {% endblock %}
