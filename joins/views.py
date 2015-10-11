@@ -1,8 +1,8 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, Http404
 from .forms import EmailForm, JoinForm
 from .models import Join
 import uuid
-
+from django.contrib.sites.models import Site
 
 def get_ip(request):
     try:
@@ -26,8 +26,15 @@ def get_ref_id():
 
 
 def share(request, ref_id):
-    context = {"ref_id":ref_id}
-    template = "share.html"
+    try:
+        join_obj = Join.objects.get(ref_id=ref_id)
+        obj = Join.objects.filter(friend=join_obj)
+        count = join_obj.referral.all().count()
+        context = {"ref_id": join_obj.ref_id, "count": count, "ref_url": "http://%s/?ref=%s" % (Site.objects.get_current().domain, join_obj.ref_id)}
+        template = "share.html"
+    except Exception, e:
+        print str(e)
+        raise Http404
     return render(request, template, context)
 
 
@@ -46,8 +53,8 @@ def home(request):
         if created:
             new_join_old.ip_address = get_ip(request)
             new_join_old.ref_id = get_ref_id()
-            if obj:
-                new_join_old.firend = obj
+            if obj :
+                new_join_old.friend = obj
             new_join_old.save()
         #redirect
         return HttpResponseRedirect("/%s" % (new_join_old.ref_id))
