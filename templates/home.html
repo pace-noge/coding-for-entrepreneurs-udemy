@@ -1,6 +1,25 @@
 
 {% extends 'base.html' %}
 {% load staticfiles %}
+
+{% block styles %}
+
+    <style type="text/css">
+
+    body {
+        border-top: 4px solid #E9804C;
+        /*min-height: 5000px;*/
+        background: url('{% static 'img/beach.jpg' %}') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -mozkit-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    </style>
+
+{% endblock %}
+
 {% block content %}
 <div class="jumbotron">
     <div class="container">
@@ -15,12 +34,32 @@
     </div>
 </div>
 
+    <div class="container text-center">
+        <div class="col-sm-6 col-sm-offset-3">
+            <h1>Hello Welcome Home</h1>
+            <form method="post" action="" class="form-horizontal">
+                <div class="form-group form-group-lg">
+                    {% csrf_token %}
+                    {% if form.email.errors %}
+                        {% for err in form.email.errors %}
+                         <div class="alert alert-danger" role="alert">{{ err }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="input-group">
+                        <input class="form-control" type="email" name="email" placeholder="Enter your email" />
+                        <span class="input-group-btn">
+                            <input type="submit" value="join" class="btn btn-primary btn-lg" />
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
-<div class="container text-center">
-    <form method="post" action="">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="join" class="btn" />
-    </form>
+<div class="row text-center" style="background-color: white; margin: 80px 0px; height: 200px;">
+    <div class="col-sm-12">
+        <h1>Hello</h1>
+    </div>
 </div>
+
 {% endblock %}
