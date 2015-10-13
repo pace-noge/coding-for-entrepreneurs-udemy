@@ -58,3 +58,4 @@ docs/_build/
 target/
 db.sqlite3
 lwc/db.sqlite3
+lwc/settings/local.py
