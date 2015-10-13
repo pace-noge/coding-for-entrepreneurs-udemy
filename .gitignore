@@ -6,6 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
+lwc/settings/local.py
+
 # Distribution / packaging
 .Python
 env/
@@ -58,4 +60,3 @@ docs/_build/
 target/
 db.sqlite3
 lwc/db.sqlite3
-lwc/settings/local.py
